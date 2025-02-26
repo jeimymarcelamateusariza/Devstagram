@@ -21,10 +21,25 @@
                 <div class="flex items-center">
                     <a href="/" class="text-3xl font-black text-gray-800">Devstagram</a>
                 </div>
-                <nav class="flex gap-2 items-center">
-                    <a href="/" class="text-gray-600 hover:text-gray-800 font-bold uppercase text-sm">Login</a>
-                    <a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-800 font-bold uppercase text-sm">Crear Cuenta</a>
-                </nav>
+
+                @auth
+                    <nav class="flex gap-2 items-center">
+                        <a href="/" class="text-gray-600 hover:text-gray-800 font-bold text-sm">Hola: <span class="font-normal ">{{ auth()->user()->username}}</span></a>
+                        <form action="{{ route('logout')}}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-gray-600 hover:text-gray-800 font-bold uppercase text-sm">Cerrar sesion</button>
+                        </form>
+                    </nav>
+                @endauth
+                @guest
+                    <nav class="flex gap-2 items-center">
+                        <a href="/" class="text-gray-600 hover:text-gray-800 font-bold uppercase text-sm">Login</a>
+                        <a href="{{ route('register') }}"
+                            class="text-gray-600 hover:text-gray-800 font-bold uppercase text-sm">Crear Cuenta</a>
+                    </nav>
+                @endguest
+
+
             </div>
         </div>
     </header>
@@ -39,9 +54,9 @@
     </main>
 
     <footer class="text-center p-5 text-gray-500 font-bold uppercase">
-        Devstagram - Todos los derechos reservados {{now()->year}}
+        Devstagram - Todos los derechos reservados {{ now()->year }}
     </footer>
-    
+
 
 </body>
 
