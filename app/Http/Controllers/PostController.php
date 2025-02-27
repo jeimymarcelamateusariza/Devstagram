@@ -23,4 +23,8 @@ class PostController extends Controller implements HasMiddleware
             'auth',
         ];
     }
+
+    public function create(){
+        return view('posts.create');
+    }
 }
